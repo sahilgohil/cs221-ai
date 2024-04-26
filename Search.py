@@ -51,8 +51,8 @@ def backtracking(problem):
     # run the function
     recurse(problem.startState(), [], 0)
     # return the best solution
-    return (best['cost'], best['history'])
-    
+    return best['cost']
+
 # testing the backtracking algorithm
 print(backtracking(problem))
 
