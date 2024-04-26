@@ -16,4 +16,17 @@ Things required in a search problem,
 - isEnd function
 - succandcost function -> returns the list of [action, newstate, costoftheaction]
 # Backtracing Algorithm for search problem
+- keep track of the best solution so far
+- recurse the state, keep track of the history, and total cost so far
+    - check if this state is the end state
+        - if it is an end state then check for if this is the best solution or not
+            - if this is the best solution then change the best solution in the cache with history
+    
+    - recurse on the children of this state
+        - for each action, newstate, cost in problem.succandcost(this state):
+            recurse(newstate,history+action,totalcost+cost)
+
+- execute the recurse function
+-return the best solution
+
 
