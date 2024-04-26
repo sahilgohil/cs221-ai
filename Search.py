@@ -13,8 +13,12 @@ class TransportationProblem(object):
     def getSuccAndCost(self, state):
         result = []
         if state + 1 <= self.N:
-            result.append('Walk',(state + 1), 1)
+            result.append(('Walk',(state + 1), 1))
         if state * 2 <= self.N:
-            result.append('Tram',(state*2), 2)
+            result.append(('Tram',(state*2), 2))
         return result
-    
+
+# testing the model
+problem = TransportationProblem(10)
+print(problem.getSuccAndCost(3))
+print(problem.getSuccAndCost(9))
