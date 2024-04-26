@@ -22,3 +22,24 @@ class TransportationProblem(object):
 problem = TransportationProblem(10)
 print(problem.getSuccAndCost(3))
 print(problem.getSuccAndCost(9))
+
+# Algorithm Backtracking Search
+def backtracking(problem):
+    best= {
+        'cost': float('inf'),
+        'history': None
+    }
+
+    def recurse(state, history, totalcost):
+        if problem.isEndState(state):
+            if totalcost<best['cost']:
+                best['cost'] = totalcost
+                best['history'] = history
+            return
+        for action, nextstate, cost in problem.getSuccAndCost(state):
+            recurse(nextstate, history + [action], totalcost + cost)
+    recurse(problem.startState(), [], 0)
+    return (best['cost'], best['history'])
+
+print(backtracking(problem))
+
