@@ -7,6 +7,9 @@ class TransportationProblem(object):
     # returns the start state
     def startState(self):
         return 1
+    # returns the state having (is previous city odd?, state)
+    def startStateDP(self):
+        return (False, 1)
     # checks if the state is an end state
     def isEndState(self, state):
         return state == self.N
@@ -21,6 +24,27 @@ class TransportationProblem(object):
         if state * 2 <= self.N:
             result.append(('Tram',(state*2), 2))
         
+        return result
+    def getSuccAndCostForDP(self, state):
+        result = []
+        #check if the current state is odd
+        isOddCurrent = state[1]%2 != 0
+        isOddPrevious = state[0]
+        # check for the next state
+        isChecking = isOddCurrent and isOddPrevious
+        
+        if isChecking:
+            # only add the next state if the previous state and the current state is not odd
+            if state[1] + 1 % 2 ==0 and state[1]+1 <= self.N:
+                result.append(('Walk',( isOddCurrent, state[1]+1 ), 1))
+            if state[1] + 1 % 2 ==0 and state[1] * 2 <= self.N:
+                result.append(('Tram',( isOddCurrent, state[1]*2 ), 2))
+        else:
+            if state[1] + 1 <= self.N:
+                result.append(('Walk',( isOddCurrent, state[1]+1 ), 1))
+            if state[1] * 2 <= self.N:
+                result.append(('Tram',( isOddCurrent, state[1]*2 ), 2))
+
         return result
     # returns the successor and cost of the state for DFS
     def getSuccAndCostForDFS(self, state):
@@ -107,9 +131,33 @@ def dynamicProgramming(problem):
         cache[state] = result
         return result
     return futureCost(problem.startState())
+# must not visit three odd cities in a row
+def dpWithContraint(problem):
+    cache = {}
+    
+    def futureCost(state):
+        if problem.isEndState(state[1]):
+            
+            return 0
+        if state in cache:
+            return cache[state]
+        min_cost = float('inf')
+        history = []
+        for action, nextState, cost in problem.getSuccAndCostForDP(state):
+            result = cost + futureCost(nextState)
+            if result < min_cost:
+                min_cost = result
+                history = history + [action]
+
+        cache[state] = result
+        return min_cost
+    return futureCost(problem.startStateDP())
+    
+
 
 # testing the backtracking algorithm
 # print(backtracking(problem))
 # print(dfs(problem))
 # print(bfs(problem))
-print(dynamicProgramming(problem))
+# print(dynamicProgramming(problem))
+print(dpWithContraint(problem))
