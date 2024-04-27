@@ -9,13 +9,20 @@ Things required in a search problem,
 4. Cost(state,action) -> returns the cost for the action on this state
 5. succ(state,action) -> return the successor state using the action on this state
 
-# Model Transportation problem
+### Model Transportation problem
 - end state
 - contructor
 - start state function -> returns the initial state
 - isEnd function
 - succandcost function -> returns the list of [action, newstate, costoftheaction]
-# Backtracing Algorithm for search problem
+### Backtracing Algorithm for search problem
+ # requrement is that,
+    - cost : any
+    - time : O(b^D) 
+    - space : O(b^D)
+    where b is the number of actions at each state
+    D is the depth of the tree
+
 - keep track of the best solution so far
 - recurse the state, keep track of the history, and total cost so far
     - check if this state is the end state
@@ -29,4 +36,5 @@ Things required in a search problem,
 - execute the recurse function
 -return the best solution
 
+# DFS Algorithm for search problem
 
