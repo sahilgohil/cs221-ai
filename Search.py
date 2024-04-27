@@ -22,11 +22,19 @@ class TransportationProblem(object):
             result.append(('Tram',(state*2), 2))
         
         return result
+    # returns the successor and cost of the state for DFS
+    def getSuccAndCostForDFS(self, state):
+        result = []
+        if state+1<=self.N:
+            result.append(('Walk',state+1))
+        if state*2<=self.N:
+            result.append(('Tram',state*2))
+        return result
 
 # testing the model
 problem = TransportationProblem(10)
-print(problem.getSuccAndCost(3))
-print(problem.getSuccAndCost(9))
+# print(problem.getSuccAndCost(3))
+# print(problem.getSuccAndCost(9))
 
 # Algorithm Backtracking Search
 def backtracking(problem):
@@ -53,6 +61,20 @@ def backtracking(problem):
     # return the best solution
     return best['cost']
 
+# Algorithm for DFS search
+def dfs(problem):
+    stack = []
+    stack.append((problem.startState(),[]))
+
+    while stack:
+        state, history = stack.pop()
+        if problem.isEndState(state):
+            return history
+        for action, nextstate in problem.getSuccAndCostForDFS(state):
+            stack.append((nextstate, history + [action]))
+    return None
+
 # testing the backtracking algorithm
-print(backtracking(problem))
+# print(backtracking(problem))
+print(dfs(problem))
 
