@@ -52,3 +52,21 @@ Things required in a search problem,
         - if it is an end state then return the history for the solution
     - add the children of the state to the stack with the updated history
 - return None for no solution
+
+### BFS Algorithm for search problem
+
+# requirement is that,
+    - cost : any constant c >= 0
+    - time : O(b^d) 
+    - space : O(b^d)
+    where b is the number of actions at each state
+    d is the depth of the tree till solution is found
+
+- make an empty queue
+- add the start state and cost and history to the queue
+- loop until queue is not empty
+    - take out the first object from the queue
+    - check if the state is an end state
+        - if it is an end state then return the cost and history for the solution
+    - add the children of the state to the queue with the updated history and cost
+- return None for no solution
