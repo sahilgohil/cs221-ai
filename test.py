@@ -22,7 +22,12 @@ class TestBacktracking(unittest.TestCase):
         expectedCost = 4
         self.assertEqual(history, expectedHistory)
         self.assertEqual(cost, expectedCost)
+    def test_dp(self):
 
+        problem = Search.TransportationProblem(10)
+        solution = Search.dynamicProgramming(problem)
+        expectedSolution = 6
+        self.assertEqual(solution, expectedSolution)
 
 if __name__ == '__main__':
     unittest.main()
