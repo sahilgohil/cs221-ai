@@ -95,6 +95,6 @@ def bfs(problem):
     return None
 # testing the backtracking algorithm
 # print(backtracking(problem))
-print(dfs(problem))
-# print(bfs(problem))
+# print(dfs(problem))
+print(bfs(problem))
 

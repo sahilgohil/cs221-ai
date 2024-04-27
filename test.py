@@ -14,6 +14,15 @@ class TestBacktracking(unittest.TestCase):
         solution = Search.dfs(problem)
         expectedSolution = ['Tram', 'Tram', 'Tram', 'Walk', 'Walk']
         self.assertEqual(solution, expectedSolution)
+    def test_bfs(self):
+        # test case for bfs algorithm
+        problem = Search.TransportationProblem(10)
+        history,cost = Search.bfs(problem)
+        expectedHistory = ['Walk', 'Tram', 'Walk', 'Tram']
+        expectedCost = 4
+        self.assertEqual(history, expectedHistory)
+        self.assertEqual(cost, expectedCost)
+
 
 if __name__ == '__main__':
     unittest.main()
