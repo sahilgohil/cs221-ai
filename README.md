@@ -70,3 +70,14 @@ Things required in a search problem,
         - if it is an end state then return the cost and history for the solution
     - add the children of the state to the queue with the updated history and cost
 - return None for no solution
+
+### Dynamic Programming for search problem
+
+# requirement is that,
+    - the dynamic programminc requries a state which is determined by us
+    - the state must be sufficient for us to decide the future state optimally
+    - futureCost(state) = {
+                            {min(a): cost(state,a) + futureCost(succ(state,a))}
+                            0      : isEndState(state)
+                            }
+    - requires a cache to maintain the past calculated costs
