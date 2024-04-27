@@ -72,7 +72,7 @@ Things required in a search problem,
 - return None for no solution
 
 ### Dynamic Programming for search problem
-
+## Basic without any constraints
 # requirement is that,
     - the dynamic programminc requries a state which is determined by us
     - the state must be sufficient for us to decide the future state optimally
@@ -81,3 +81,9 @@ Things required in a search problem,
                             0      : isEndState(state)
                             }
     - requires a cache to maintain the past calculated costs
+
+## Constraint is that cant visit 3 odd cities in a row
+# now the state must have one more variable
+# requirement is that,
+    - must not visit 3 odd cities in a row.
+    - the state will be s = (is prev city odd?, currentCity)
