@@ -93,8 +93,23 @@ def bfs(problem):
         for action, nextstate, actionCost in problem.getSuccAndCostForBFS(state):
             queue.append((nextstate, history + [action], cost + actionCost))
     return None
+
+def dynamicProgramming(problem):
+    cache = {}
+    def futureCost(state):
+        if problem.isEndState(state):
+            return 0
+        if state in cache:
+            return cache[state]
+        result = min(cost+futureCost(nextState) \
+                    for action, nextState, cost in problem.getSuccAndCost(state) \
+                    )
+        cache[state] = result
+        return result
+    return futureCost(problem.startState())
+
 # testing the backtracking algorithm
 # print(backtracking(problem))
 # print(dfs(problem))
-print(bfs(problem))
-
+# print(bfs(problem))
+print(dynamicProgramming(problem))
