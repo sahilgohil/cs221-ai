@@ -38,3 +38,17 @@ Things required in a search problem,
 
 # DFS Algorithm for search problem
 
+# requrement is that,
+    - cost : 0
+    - time : O(b^D) 
+    - space : O(D) (no need to store the information for the previous states)
+    where b is the number of actions at each state
+    D is the depth of the tree
+- stack is required for the DFS
+- add the start state and empty history to the stack
+- loop until stack is not empty
+    - take out the first object from the stack
+    - check if the state is an end state
+        - if it is an end state then return the history for the solution
+    - add the children of the state to the stack with the updated history
+- return None for no solution
