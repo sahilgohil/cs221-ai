@@ -30,6 +30,14 @@ class TransportationProblem(object):
         if state*2<=self.N:
             result.append(('Tram',state*2))
         return result
+    def getSuccAndCostForBFS(self, state):
+        result = []
+
+        if state+1<=self.N:
+            result.append(('Walk',state+1, 1))
+        if state*2<=self.N:
+            result.append(('Tram',state*2, 1))
+        return result
 
 # testing the model
 problem = TransportationProblem(10)
@@ -73,8 +81,20 @@ def dfs(problem):
         for action, nextstate in problem.getSuccAndCostForDFS(state):
             stack.append((nextstate, history + [action]))
     return None
+def bfs(problem):
+    queue = []
 
+    queue.append((problem.startState(), [], 0))
+
+    while queue:
+        state, history, cost = queue.pop(0)
+        if problem.isEndState(state):
+            return (history, cost)
+        for action, nextstate, actionCost in problem.getSuccAndCostForBFS(state):
+            queue.append((nextstate, history + [action], cost + actionCost))
+    return None
 # testing the backtracking algorithm
 # print(backtracking(problem))
-print(dfs(problem))
+# print(dfs(problem))
+print(bfs(problem))
 
