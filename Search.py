@@ -1,3 +1,4 @@
+import heapq
 # this is a Model class for the transportation problem
 class TransportationProblem(object):
     def __init__(self, N):
@@ -148,6 +149,22 @@ def dpWithContraint(problem):
     
     return futureCost(problem.startStateDP())
 
+def compare_state(state1, state2):
+    return state1[1]-state2[1]
+
+def uniformCostSearch(problem):
+    frontier = []
+    explored = []
+    heapq.heappush(frontier, (problem.startState(), 0))
+    while frontier:
+        state, pastCost = heapq.heappop(frontier)
+        if problem.isEndState(state):
+            return pastCost, explored
+        explored = explored + [state]
+        for action, nextState, cost in problem.getSuccAndCost(state):
+            if nextState not in explored:
+                heapq.heappush(frontier, (nextState, pastCost + cost))
+    return None
 
     
 # 1 2 3 4 5 6 7 8 9 10
@@ -158,4 +175,5 @@ def dpWithContraint(problem):
 # print(dfs(problem))
 # print(bfs(problem))
 # print(dynamicProgramming(problem))
-print(dpWithContraint(problem))
+# print(dpWithContraint(problem))
+print(uniformCostSearch(problem))
