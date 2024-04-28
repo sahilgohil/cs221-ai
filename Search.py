@@ -145,7 +145,10 @@ def dpWithContraint(problem):
 
         cache[state] = result
         return cache[state]
+    
     return futureCost(problem.startStateDP())
+
+
     
 # 1 2 3 4 5 6 7 8 9 10
 # 1 3 4 5 10

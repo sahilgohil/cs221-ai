@@ -87,3 +87,33 @@ Things required in a search problem,
 # requirement is that,
     - must not visit 3 odd cities in a row.
     - the state will be s = (is prev city odd?, currentCity)
+
+### Uniform Cost Search for search problem
+## cost can be any
+# requirement is that,
+    - cost : any
+    - time :
+    - space :
+    - has three sets 
+    1. Explored: has all the area that are explored with their optimal path known
+    2. Frontier: has all the area that are explored but their optimal path is unknown
+    3. Unexplored: has all the area that are yet to be explored
+    SUDO code is:
+    - add start state to frontier (Priority Queue)
+    - loop until frontier is empty
+        - take out the first object from the frontier which has the smallest priority p
+        - check if the state is an end state
+            - return the solution
+        - add the state to the explored set
+        -for each action a belongs to Action(s):
+            - get the successor state S'
+            - if the S' is already in the explored then continue
+            -update the frontier with S' with priority p+cost(s,a)
+    
+
+### A* Search for search problem
+## cost can be any
+# requirement is that,
+    - cost : any
+    - time :
+    - space :
