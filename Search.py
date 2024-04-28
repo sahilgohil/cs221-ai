@@ -134,26 +134,21 @@ def dynamicProgramming(problem):
 # must not visit three odd cities in a row
 def dpWithContraint(problem):
     cache = {}
-    
     def futureCost(state):
         if problem.isEndState(state[1]):
-            
             return 0
         if state in cache:
             return cache[state]
-        min_cost = float('inf')
-        history = []
-        for action, nextState, cost in problem.getSuccAndCostForDP(state):
-            result = cost + futureCost(nextState)
-            if result < min_cost:
-                min_cost = result
-                history = history + [action]
+        
+        result = min(cost + futureCost(nextState) \
+                for action, nextState, cost in problem.getSuccAndCostForDP(state))
 
         cache[state] = result
-        return min_cost
+        return cache[state]
     return futureCost(problem.startStateDP())
     
-
+# 1 2 3 4 5 6 7 8 9 10
+# 1 3 4 5 10
 
 # testing the backtracking algorithm
 # print(backtracking(problem))
